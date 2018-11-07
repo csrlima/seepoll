@@ -56,7 +56,7 @@ function download(fileEntry, uri, readBinaryData) {
 }
 
 function displayImageByFileURL(fileEntry) {
-    var elem = document.getElementById('imageElement');
+    var elem = document.getElementById('demoimg');
     elem.src = fileEntry.toURL();
 }
 
@@ -84,7 +84,7 @@ function displayImage(blob) {
     var objURL = window.URL.createObjectURL(blob);
 
     // Displays image if result is a valid DOM string for an image.
-    var elem = document.getElementById('imageElement');
+    var elem = document.getElementById('demoimg');
     elem.src = objURL;
 }
 
