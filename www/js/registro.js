@@ -50,3 +50,10 @@ function download(fileEntry, uri, readBinaryData) {
         }
     );
 }
+
+function onErrorCreateFile() {
+    console.log("Create file fail...");}
+
+function onErrorLoadFs() {
+    console.log("File system fail...");
+}
