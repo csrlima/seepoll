@@ -3,8 +3,9 @@ $("form").submit(function( event ) {
     location.href = "index.html"
 });
 
-function download() {
+// function download() {
     // window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
+document.addEventListener("deviceready", function() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
         var url = 'http://cordova.apache.org/static/img/cordova_bot.png';
@@ -17,7 +18,8 @@ function download() {
         }, onErrorCreateFile);
 
     }, onErrorLoadFs);
-}
+    }, false);
+// }
 
 function onErrorLoadFs(msg){
     alert(msg);
@@ -70,4 +72,4 @@ function onErrorLoadFs() {
     console.log("File system fail...");
 }
 
-download()
+// download()
