@@ -6,31 +6,22 @@ $("form").submit(function( event ) {
 // function download() {
     // window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
 document.addEventListener("deviceready", function() {
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 5 * 1024 * 1024, function (fs) {
+    window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
 
+        console.log('file system open: ' + fs.name);
+
+        // Make sure you add the domain name to the Content-Security-Policy <meta> element.
         var url = 'http://cordova.apache.org/static/img/cordova_bot.png';
-        fs.root.getFile('downloaded-image.png', {
-            create: true,
-            exclusive: false
-        }, function (fileEntry) {
-            // file_transfer(fileEntry, encodeURI(url), true);
-            file_transfer(fileEntry, url, true);
+        // Parameters passed to getFile create a new file or return the file if it already exists.
+        fs.root.getFile('downloaded-image.png', { create: true, exclusive: false }, function (fileEntry) {
+            download(fileEntry, url, true);
 
         }, onErrorCreateFile);
 
     }, onErrorLoadFs);
-    }, false);
-// }
+}, false);
 
-function onErrorLoadFs(msg){
-    alert(msg);
-}
-
-function onErrorCreateFile(msg){
-    alert(msg);
-}
-
-function file_transfer(fileEntry, uri, readBinaryData) {
+function download(fileEntry, uri, readBinaryData) {
 
     var fileTransfer = new FileTransfer();
     var fileURL = fileEntry.toURL();
@@ -39,21 +30,21 @@ function file_transfer(fileEntry, uri, readBinaryData) {
         uri,
         fileURL,
         function (entry) {
-            alert("download complete: " + entry.toURL());
-
+            console.log("Successful download...");
+            console.log("download complete: " + entry.toURL());
             if (readBinaryData) {
-                // Read the file...
-                readBinaryFile(entry);
-            } else {
-                // Or just display it.
-                displayImageByFileURL(entry);
+              // Read the file...
+              readBinaryFile(entry);
             }
-
+            else {
+              // Or just display it.
+              displayImageByFileURL(entry);
+            }
         },
         function (error) {
-            alert("download error source " + error.source);
-            alert("download error target " + error.target);
-            alert("upload error code" + error.code);
+            console.log("download error source " + error.source);
+            console.log("download error target " + error.target);
+            console.log("upload error code" + error.code);
         },
         null, // or, pass false
         {
@@ -62,6 +53,11 @@ function file_transfer(fileEntry, uri, readBinaryData) {
             //}
         }
     );
+}
+
+function displayImageByFileURL(fileEntry) {
+    var elem = document.getElementById('imageElement');
+    elem.src = fileEntry.toURL();
 }
 
 function readBinaryFile(fileEntry) {
@@ -88,13 +84,18 @@ function displayImage(blob) {
     var objURL = window.URL.createObjectURL(blob);
 
     // Displays image if result is a valid DOM string for an image.
-    var elem = document.getElementById('demoimg');
+    var elem = document.getElementById('imageElement');
     elem.src = objURL;
 }
-function displayImageByFileURL(fileEntry) {
-    var elem = document.getElementById('demoimg2');
-    elem.src = fileEntry.toURL();
+
+function onErrorLoadFs(msg){
+    alert(msg);
 }
+
+function onErrorCreateFile(msg){
+    alert(msg);
+}
+
 
 function onErrorCreateFile() {
     console.log("Create file fail...");
