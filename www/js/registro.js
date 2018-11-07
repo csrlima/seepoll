@@ -4,7 +4,8 @@ $("form").submit(function( event ) {
 });
 
 function download() {
-    window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
+    // window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
         var url = 'http://cordova.apache.org/static/img/cordova_bot.png';
         fs.root.getFile('downloaded-image.png', {
