@@ -63,13 +63,46 @@ function file_transfer(fileEntry, uri, readBinaryData) {
     );
 }
 
+function readBinaryFile(fileEntry) {
+    fileEntry.file(function (file) {
+        var reader = new FileReader();
 
+        reader.onloadend = function() {
+
+            console.log("Successful file read: " + this.result);
+            // displayFileData(fileEntry.fullPath + ": " + this.result);
+
+            var blob = new Blob([new Uint8Array(this.result)], { type: "image/png" });
+            displayImage(blob);
+        };
+
+        reader.readAsArrayBuffer(file);
+
+    }, onErrorReadFile);
+}
+
+function displayImage(blob) {
+
+    // Note: Use window.URL.revokeObjectURL when finished with image.
+    var objURL = window.URL.createObjectURL(blob);
+
+    // Displays image if result is a valid DOM string for an image.
+    var elem = document.getElementById('demoimg');
+    elem.src = objURL;
+}
+function displayImageByFileURL(fileEntry) {
+    var elem = document.getElementById('demoimg2');
+    elem.src = fileEntry.toURL();
+}
 
 function onErrorCreateFile() {
-    console.log("Create file fail...");}
-
+    console.log("Create file fail...");
+}
 function onErrorLoadFs() {
     console.log("File system fail...");
+}
+function onErrorReadFile() {
+    console.log("File read fail...");
 }
 
 // download()
