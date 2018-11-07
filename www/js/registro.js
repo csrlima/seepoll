@@ -6,14 +6,15 @@ $("form").submit(function( event ) {
 // function download() {
     // window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
 document.addEventListener("deviceready", function() {
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 5 * 1024 * 1024, function (fs) {
 
         var url = 'http://cordova.apache.org/static/img/cordova_bot.png';
         fs.root.getFile('downloaded-image.png', {
             create: true,
             exclusive: false
         }, function (fileEntry) {
-            file_transfer(fileEntry, encodeURI(url), true);
+            // file_transfer(fileEntry, encodeURI(url), true);
+            file_transfer(fileEntry, url, true);
 
         }, onErrorCreateFile);
 
