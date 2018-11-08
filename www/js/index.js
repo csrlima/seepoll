@@ -35,28 +35,13 @@ document.addEventListener("deviceready", function() {
     // window.location = "usee.html"
 }, false);
 
+var file_name = "";
+
 function prepare_url(local_name) {
-
-
-    var reader = new FileReader();
-    var fileSource = local_name;
-    reader.onloadend = function(evt) {
-      if(evt.target.result != null) {
-          // If you receive not null value the file exists
-           // fileDoesNotExist(local_name)
-           alert("file does not exist");
-      } else {
-          // Otherwise the file doesn't exists
-          // fileExists()
-          console.log("Archivo ya existe");
-      }
-      reader.readAsDataURL(fileSource);
-  };
-    // var resp = false;
-    // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-    //     fileSystem.root.getFile(local_name, { create: false }, function(){ resp = true}, function(){ resp = false});
-    //     console.log(resp);
-    // }, onErrorLoadFs); //of requestFileSystem
+    file_name = local_name;
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+        fileSystem.root.getFile(file_name, { create: false }, fileExists, fileDoesNotExist);
+    }, onErrorLoadFs); //of requestFileSystem
 
     // window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
     // resp = window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name);
@@ -64,26 +49,17 @@ function prepare_url(local_name) {
 }
 
 
-function fileExists2(fileEntry){
-    alert("File " + fileEntry.name + " exists!");
-}
-function fileDoesNotExist2(){
-    alert("file does not exist");
-}
-
 function fileExists(){
-    console.log("Archivo ya existe");
+    console.log("Archivo ya existe: " + file_name);
 }
 
-function fileDoesNotExist(local_name){
+function fileDoesNotExist(){
     var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
-    console.log(fileEntry.name);
     var fileTransfer = new FileTransfer();
-    console.log("About to start transfer");
+    console.log("About to start transfer:" + file_name);
     fileTransfer.download(url + fileEntry.name, "file:///storage/emulated/0/"+fileEntry.name,
         function(entry) {
             console.log("Success!");
-            // appStart();
         },
         function(err) {
             console.log("Error");
