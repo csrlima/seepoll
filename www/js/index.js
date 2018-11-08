@@ -39,7 +39,7 @@ document.addEventListener("deviceready", function() {
 function prepare_url(url, local_name) {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
         console.log('file system open: ' + fs.name);
-        fs.root.getFile(local_name, { create: true, exclusive: false }, function (fileEntry) {
+        fs.root.getFile(local_name, { create: false, exclusive: false }, function (fileEntry) {
             // if(fileEntry.isFile === false){
                 download(fileEntry, url + local_name, false);
             // }else{
