@@ -37,11 +37,23 @@ document.addEventListener("deviceready", function() {
 }, false);
 
 function prepare_url(local_name) {
-    console.log(file_name);
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-        file_name = local_name;
-        fileSystem.root.getFile(local_name, { create: false }, fileExists, fileDoesNotExist);
-    }, onErrorLoadFs); //of requestFileSystem
+    console.log(local_name);
+    $.ajax({
+        url: "file:///storage/emulated/0/"+local_name,
+        type: 'HEAD',
+        error: function(){
+            //file not exists
+            console.log("file not exists "+local_name);
+        },
+        success: function(){
+            //file exists
+            console.log('the file is here'+ local_name);
+        }
+    });
+    // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+    //     file_name = local_name;
+    //     fileSystem.root.getFile(local_name, { create: false }, fileExists, fileDoesNotExist);
+    // }, onErrorLoadFs); //of requestFileSystem
 
     // window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
     // resp = window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name);
