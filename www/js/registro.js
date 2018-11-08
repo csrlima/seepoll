@@ -6,7 +6,8 @@ $("form").submit(function( event ) {
 // function download() {
     // window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
 document.addEventListener("deviceready", function() {
-    window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
+    // window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
         console.log('file system open: ' + fs.name);
 
