@@ -27,11 +27,11 @@ app.initialize();
 // $(document).ready(function(){
 //
 // })
-add_slide_nodes();
-add_slide_nodes();
+add_slide_nodes('useeupoll001.jpg');
+add_slide_nodes('useeupoll002.jpg');
 
-function add_slide_nodes() {
-    $('.slides').append('<div><img data-u="image" src="" /></div>')
+function add_slide_nodes(local_name) {
+    $('.slides').append('<div><img data-u="image" src="file:///storage/emulated/0/'+local_name+'" /></div>')
 }
 
 
