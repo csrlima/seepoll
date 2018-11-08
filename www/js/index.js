@@ -48,7 +48,7 @@ function prepare_url(local_name) {
                     function(){ result = false; } // file does not exist
                 );
             },
-            getFSFail
+            onErrorLoadFs
         ); //of requestFileSystem
 
         if(result === true){
