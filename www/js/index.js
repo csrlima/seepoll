@@ -36,17 +36,38 @@ document.addEventListener("deviceready", function() {
 }, false);
 
 function prepare_url(local_name) {
-    var reader = new FileReader();
-    var fileSource = "file:///storage/emulated/0/"+local_name;
-    reader.onloadend = function(evt) {
-      if(evt.target.result != null) {
-          // If you receive not null value the file exists
-           fileDoesNotExist(local_name)
-      } else {
-          // Otherwise the file doesn't exists
-          fileExists()
-      }
-  };
+        var result = false;
+        window.requestFileSystem(
+            LocalFileSystem.PERSISTENT,
+            0,
+            function(fileSystem){
+                fileSystem.root.getFile(
+                    path,
+                    { create: false },
+                    function(){ result = true; }, // file exists
+                    function(){ result = false; } // file does not exist
+                );
+            },
+            getFSFail
+        ); //of requestFileSystem
+
+        if(result === true){
+            fileExists()
+        }else{
+            fileDoesNotExist(local_name)
+        }
+
+  //   var reader = new FileReader();
+  //   var fileSource = "file:///storage/emulated/0/"+local_name;
+  //   reader.onloadend = function(evt) {
+  //     if(evt.target.result != null) {
+  //         // If you receive not null value the file exists
+  //          fileDoesNotExist(local_name)
+  //     } else {
+  //         // Otherwise the file doesn't exists
+  //         fileExists()
+  //     }
+  // };
     // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
     //     fileSystem.root.getFile("file:///storage/emulated/0/"+local_name, { create: false }, fileExists, fileDoesNotExist(local_name));
     // }, onErrorLoadFs); //of requestFileSystem
