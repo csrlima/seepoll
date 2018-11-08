@@ -50,7 +50,7 @@ function prepare_url(local_name) {
   //     }
   // };
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-        fileSystem.root.getFile(local_name, { create: false }, fileExists, fileDoesNotExist;
+        fileSystem.root.getFile(local_name, { create: false }, fileExists, fileDoesNotExist);
     }, onErrorLoadFs); //of requestFileSystem
 
     // window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
