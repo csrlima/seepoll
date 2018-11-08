@@ -50,6 +50,7 @@ function prepare_url(local_name) {
           // fileExists()
           console.log("Archivo ya existe");
       }
+      reader.readAsDataURL(fileSource);
   };
     // var resp = false;
     // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
