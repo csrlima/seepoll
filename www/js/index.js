@@ -27,11 +27,11 @@ app.initialize();
 // $(document).ready(function(){
 //
 // })
-// add_slide_nodes();
-// add_slide_nodes();
+add_slide_nodes();
+add_slide_nodes();
 
 function add_slide_nodes() {
-    $('.slides').append'<div><img data-u="image" src="" /></div>'
+    $('.slides').append('<div><img data-u="image" src="" /></div>')
 }
 
 
