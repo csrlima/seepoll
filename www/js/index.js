@@ -31,7 +31,7 @@ document.addEventListener("deviceready", function() {
     prepare_url(url, 'useeupoll004.jpg')
     prepare_url(url, 'useeupoll005.jpg')
     prepare_url(url, 'useeupoll006.jpg')
-    window.location = "usee.html"
+    // window.location = "usee.html"
 }, false);
 
 function prepare_url(url, local_name) {
