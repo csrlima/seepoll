@@ -36,7 +36,9 @@ document.addEventListener("deviceready", function() {
 }, false);
 
 function prepare_url(local_name) {
-    window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
+    // window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
+    resp = window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name);
+    console.log(resp)
 }
 
 function fileExists(fileEntry){
