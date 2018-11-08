@@ -23,6 +23,20 @@ var app = {
 };
 
 app.initialize();
+
+// $(document).ready(function(){
+//
+// })
+add_slide_nodes();
+add_slide_nodes();
+
+function add_slide_nodes() {
+    $('.slides').append'<div><img data-u="image" src="" /></div>'
+}
+
+
+
+
 document.addEventListener("deviceready", function() {
     console.log('ready listener')
     var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
@@ -56,8 +70,8 @@ function download(fileEntry, uri, readBinaryData) {
         uri,
         fileURL,
         function (entry) {
-            console.log("Successful download...");
-            // console.log("download complete: " + entry.toURL());
+            // console.log("Successful download...");
+            console.log("download complete: " + entry.toURL());
             // if (readBinaryData) {
             //   readBinaryFile(entry);
             // }
