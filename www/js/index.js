@@ -51,7 +51,7 @@ function prepare_url(local_name) {
   // };
     var resp = false;
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-        fileSystem.root.getFile(local_name, { create: false }, function({ resp = true}), function({ resp = true}));
+        fileSystem.root.getFile(local_name, { create: false }, function(){ resp = true}, function(){ resp = false});
         console.console.log(resp);
     }, onErrorLoadFs); //of requestFileSystem
 
