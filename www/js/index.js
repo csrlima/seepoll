@@ -1,4 +1,4 @@
-var file_name = "";
+var file_name;
 ///INICIALIZACION DE APP
 var app = {
     initialize: function() {
@@ -38,6 +38,7 @@ document.addEventListener("deviceready", function() {
 
 function prepare_url(local_name) {
     file_name = local_name;
+    console.log(file_name);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
         fileSystem.root.getFile(file_name, { create: false }, fileExists, fileDoesNotExist);
     }, onErrorLoadFs); //of requestFileSystem
