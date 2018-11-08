@@ -1,41 +1,35 @@
 
 var base_url = "http://xmpp.radiomarketbeat.com/resources_mobile/";
 var key_value = "c526bef2-cc7d-48fc-830d-3c094788a942"
+///INICIALIZACION DE APP
 var app = {
-    // Application Constructor
     initialize: function() {
         this.bindEvents();
     },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
     },
-    // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
-
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-
         console.log('Received Event: ' + id);
     }
 };
 
 app.initialize();
+document.addEventListener("deviceready", function() {
+    var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
+    prepare_url(url, 'useeupoll001.jpg')
+    prepare_url(url, 'useeupoll002.jpg')
+}, false);
 
-
+///FUNCIONES PERSONALIZADAS
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -45,96 +39,113 @@ function getUrlVars() {
 }
 
 
-
-
-
-
-
-$(document).ready(function(){var base_url = "http://xmpp.radiomarketbeat.com/resources_mobile/";
-var key_value = "c526bef2-cc7d-48fc-830d-3c094788a942"
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
-};
-
-app.initialize();
-
-
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
+function prepare_url(url, local_name) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+        console.log('file system open: ' + fs.name);
+        fs.root.getFile(local_name, { create: true, exclusive: false }, function (fileEntry) {
+            download(fileEntry, url + local_name, false);
+        }, onErrorCreateFile);
+    }, onErrorLoadFs);
 }
-    $("#btn-register").click(function( event ) {
-        event.preventDefault();
-        location.href = "registro.html"
-    });
-});
+function download(fileEntry, uri, readBinaryData) {
+    var fileTransfer = new FileTransfer();
+    var fileURL = fileEntry.toURL();
+    fileTransfer.download(
+        uri,
+        fileURL,
+        function (entry) {
+            console.log("Successful download...");
+            // console.log("download complete: " + entry.toURL());
+            // if (readBinaryData) {
+            //   readBinaryFile(entry);
+            // }
+            // else {
+            //   displayImageByFileURL(entry);
+            // }
+        },
+        function (error) {
+            console.log("download error source " + error.source);
+            console.log("download error target " + error.target);
+            console.log("upload error code" + error.code);
+        },
+        null, // or, pass false
+        {
+            //headers: {
+            //    "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+            //}
+        }
+    );
+}
+//
+// function displayImageByFileURL(fileEntry) {
+//     console.log(fileEntry.toURL())
+//     var elem = document.getElementById('demoimg');
+//     elem.src = fileEntry.toURL();
+// }
+
+// function readBinaryFile(fileEntry) {
+//     fileEntry.file(function (file) {
+//         var reader = new FileReader();
+//
+//         reader.onloadend = function() {
+//
+//             console.log("Successful file read: " + this.result);
+//             // displayFileData(fileEntry.fullPath + ": " + this.result);
+//
+//             var blob = new Blob([new Uint8Array(this.result)], { type: "image/png" });
+//             displayImage(blob);
+//         };
+//
+//         reader.readAsArrayBuffer(file);
+//
+//     }, onErrorReadFile);
+// }
+
+// function displayImage(blob) {
+//
+//     // Note: Use window.URL.revokeObjectURL when finished with image.
+//     var objURL = window.URL.createObjectURL(blob);
+//
+//     // Displays image if result is a valid DOM string for an image.
+//     var elem = document.getElementById('demoimg');
+//     elem.src = objURL;
+// }
+
+function onErrorCreateFile() {
+    console.log("Create file fail...");
+}
+function onErrorLoadFs() {
+    console.log("File system fail...");
+}
+// function onErrorReadFile() {
+//     console.log("File read fail...");
+// }
 
 
+
+
+
+
+
+
+
+
+
+
+
+///PLUGIN DE SLIDESHOW
 jssor_1_slider_init = function() {
     var jssor_1_options = {
-        $FillMode: 2,                                       //[Optional] The way to fill image in slide, 0 stretch, 1 contain (keep aspect ratio and put all inside slide), 2 cover (keep aspect ratio and cover whole slide), 4 actual size, 5 contain for large image, actual size for small image, default value is 0
-        $AutoPlay: 1,                                       //[Optional] Auto play or not, to enable slideshow, this option must be set to greater than 0. Default value is 0. 0: no auto play, 1: continuously, 2: stop at last slide, 4: stop on click, 8: stop on user navigation (by arrow/bullet/thumbnail/drag/arrow key navigation)
-        $Idle: 4000,                                        //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
-        $PauseOnHover: 1,                                   //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
-        $SlideEasing: $Jease$.$OutQuint,                    //[Optional] Specifies easing for right to left animation, default value is $Jease$.$OutQuad
-        $SlideDuration: 800,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+        $FillMode: 2,
+        $AutoPlay: 1,
+        $Idle: 4000,
+        $PauseOnHover: 1,
+        $SlideEasing: $Jease$.$OutQuint,
+        $SlideDuration: 800,
         $MinDragOffsetToSlide: 20
-      // $Idle: 2000,
-      // $SlideEasing: $Jease$.$InOutSine,
     };
-
     var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-    //make sure to clear margin of the slider container element
     jssor_1_slider.$Elmt.style.margin = "";
-
-    /*#region responsive code begin*/
-
-    /*
-        parameters to scale jssor slider to fill parent container
-
-        MAX_WIDTH
-            prevent slider from scaling too wide
-        MAX_HEIGHT
-            prevent slider from scaling too high, default value is original height
-        MAX_BLEEDING
-            prevent slider from bleeding outside too much, default value is 1
-            0: contain mode, allow up to 0% to bleed outside, the slider will be all inside parent container
-            1: cover mode, allow up to 100% to bleed outside, the slider will cover full area of parent container
-            0.1: flex mode, allow up to 10% to bleed outside, this is better way to make full window slider, especially for mobile devices
-    */
-
     var MAX_WIDTH = 3000;
     var MAX_HEIGHT = 3000;
     var MAX_BLEEDING = 0.128;
@@ -142,23 +153,14 @@ jssor_1_slider_init = function() {
     function ScaleSlider() {
         var containerElement = jssor_1_slider.$Elmt.parentNode;
         var containerWidth = containerElement.clientWidth;
-
         if (containerWidth) {
             var originalWidth = jssor_1_slider.$OriginalWidth();
             var originalHeight = jssor_1_slider.$OriginalHeight();
-
             var containerHeight = containerElement.clientHeight || originalHeight;
-
             var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
             var expectedHeight = Math.min(MAX_HEIGHT || containerHeight, containerHeight);
-
-            //scale the slider to expected size
             jssor_1_slider.$ScaleSize(expectedWidth, expectedHeight, MAX_BLEEDING);
-
-            //position slider at center in vertical orientation
             jssor_1_slider.$Elmt.style.top = ((containerHeight - expectedHeight) / 2) + "px";
-
-            //position slider at center in horizontal orientation
             jssor_1_slider.$Elmt.style.left = ((containerWidth - expectedWidth) / 2) + "px";
         }
         else {
@@ -176,5 +178,4 @@ jssor_1_slider_init = function() {
     $Jssor$.$AddEvent(window, "load", ScaleSlider);
     $Jssor$.$AddEvent(window, "resize", ScaleSlider);
     $Jssor$.$AddEvent(window, "orientationchange", OnOrientationChange);
-    /*#endregion responsive code end*/
 };
