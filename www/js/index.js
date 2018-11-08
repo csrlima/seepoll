@@ -1,4 +1,5 @@
-var file_name;
+var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
+
 ///INICIALIZACION DE APP
 var app = {
     initialize: function() {
@@ -36,90 +37,30 @@ document.addEventListener("deviceready", function() {
     // window.location = "usee.html"
 }, false);
 
-function prepare_url(local_name) {
-    console.log(local_name);
+function prepare_url(file_name) {
     $.ajax({
-        url: "file:///storage/emulated/0/"+local_name,
+        url: "file:///storage/emulated/0/" + file_name,
         type: 'HEAD',
         error: function(){
-            //file not exists
-            console.log("file not exists "+local_name);
+            download_file(file_name)
+            // console.log("file not exists "+file_name);
         },
         success: function(){
-            //file exists
-            console.log('the file is here'+ local_name);
+            console.log('Archivo ya existe: ' + file_name);
         }
     });
-    // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-    //     file_name = local_name;
-    //     fileSystem.root.getFile(local_name, { create: false }, fileExists, fileDoesNotExist);
-    // }, onErrorLoadFs); //of requestFileSystem
-
-    // window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
-    // resp = window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name);
-    // console.log(resp)
 }
 
-
-function fileExists(){
-    console.log("Archivo ya existe: " + file_name);
-}
-
-function fileDoesNotExist(e){
-    console.dir(e);
-    var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
+function download_file(file_name){
     var fileTransfer = new FileTransfer();
     console.log("About to start transfer:" + file_name);
-    fileTransfer.download(url + file_name, "file:///storage/emulated/0/"+file_name,
+    fileTransfer.download(url + file_name, "file:///storage/emulated/0/" + file_name,
         function(entry) {
             console.log("Success!");
         },
         function(err) {
             console.log("Error");
             console.dir(err);
-        });
-
-
-
-
-    // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-    //    console.log('file system open: ' + fs.name);
-    //    fs.root.getFile(local_name, { create: true, exclusive: false }, function (fileEntry) {
-    //        // if(fileEntry.isFile === false){
-    //            download(fileEntry, url + local_name, false);
-    //        // }else{
-    //        //     console.log("Archivo ya existe: " + local_name);
-    //        // }
-    //    }, onErrorCreateFile);
-    // }, onErrorLoadFs);
-
-}
-
-function download(fileEntry, uri, readBinaryData) {
-    var fileTransfer = new FileTransfer();
-    var fileURL = fileEntry.toURL();
-    fileTransfer.download(
-        uri,
-        fileURL,
-        function (entry) {
-            console.log("download complete: " + entry.toURL());
-        },
-        function (error) {
-            console.log("download error source " + error.source);
-            console.log("download error target " + error.target);
-            console.log("upload error code" + error.code);
-        },
-        null,
-        {
-            //None
         }
     );
-}
-
-function onErrorCreateFile() {
-    console.log("Create file fail...");
-}
-
-function onErrorLoadFs() {
-    console.log("File system fail...");
 }
