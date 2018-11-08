@@ -15,7 +15,7 @@ document.addEventListener("deviceready", function() {
         var url = 'http://xmpp.radiomarketbeat.com/cci/assets/img/203.png';
         // Parameters passed to getFile create a new file or return the file if it already exists.
         fs.root.getFile('downloaded-image.png', { create: true, exclusive: false }, function (fileEntry) {
-            download(fileEntry, url, true);
+            download(fileEntry, url, false);
 
         }, onErrorCreateFile);
 
@@ -57,6 +57,7 @@ function download(fileEntry, uri, readBinaryData) {
 }
 
 function displayImageByFileURL(fileEntry) {
+    console.log(fileEntry.toURL())
     var elem = document.getElementById('demoimg');
     elem.src = fileEntry.toURL();
 }
