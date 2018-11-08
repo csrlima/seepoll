@@ -1,3 +1,4 @@
+var file_name = "";
 ///INICIALIZACION DE APP
 var app = {
     initialize: function() {
@@ -34,8 +35,6 @@ document.addEventListener("deviceready", function() {
     prepare_url('useeupoll008.jpg')
     // window.location = "usee.html"
 }, false);
-
-var file_name = "";
 
 function prepare_url(local_name) {
     file_name = local_name;
