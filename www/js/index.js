@@ -31,6 +31,8 @@ document.addEventListener("deviceready", function() {
     prepare_url(url, 'useeupoll004.jpg')
     prepare_url(url, 'useeupoll005.jpg')
     prepare_url(url, 'useeupoll006.jpg')
+    prepare_url(url, 'useeupoll007.jpg')
+    prepare_url(url, 'useeupoll008.jpg')    
     // window.location = "usee.html"
 }, false);
 

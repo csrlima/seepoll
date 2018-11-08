@@ -29,12 +29,15 @@ $(document).ready(function(){
         window.location = "registro.html"
     })
 })
+
 add_slide_nodes('useeupoll001.jpg');
 add_slide_nodes('useeupoll002.jpg');
 add_slide_nodes('useeupoll003.jpg');
 add_slide_nodes('useeupoll004.jpg');
 add_slide_nodes('useeupoll005.jpg');
 add_slide_nodes('useeupoll006.jpg');
+add_slide_nodes('useeupoll007.jpg');
+add_slide_nodes('useeupoll008.jpg');
 
 function add_slide_nodes(local_name) {
     $('.slides').append('<div><img data-u="image" src="file:///storage/emulated/0/'+local_name+'" /></div>')
