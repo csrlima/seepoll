@@ -44,7 +44,7 @@ function prepare_url(local_name) {
             0,
             function(fileSystem){
                 fileSystem.root.getFile(
-                    "file:///storage/emulated/0/"+local_name,
+                    local_name,
                     { create: false },
                     function(){ result = true; }, // file exists
                     function(){ result = false; } // file does not exist
