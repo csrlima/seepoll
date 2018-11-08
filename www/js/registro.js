@@ -12,7 +12,15 @@ document.addEventListener("deviceready", function() {
         console.log('file system open: ' + fs.name);
 
         // Make sure you add the domain name to the Content-Security-Policy <meta> element.
-        var url = 'http://xmpp.radiomarketbeat.com/cci/assets/img/203.png';
+        var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/useeupoll001.jpg';
+        // Parameters passed to getFile create a new file or return the file if it already exists.
+        fs.root.getFile('downloaded-image.png', { create: true, exclusive: false }, function (fileEntry) {
+            download(fileEntry, url, false);
+
+        }, onErrorCreateFile);
+
+        // Make sure you add the domain name to the Content-Security-Policy <meta> element.
+        var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/useeupoll002.jpg';
         // Parameters passed to getFile create a new file or return the file if it already exists.
         fs.root.getFile('downloaded-image.png', { create: true, exclusive: false }, function (fileEntry) {
             download(fileEntry, url, false);
