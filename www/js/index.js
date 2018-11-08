@@ -76,7 +76,7 @@ function fileDoesNotExist(local_name){
     console.log("About to start transfer");
     fileTransfer.download(url + local_name, "file:///storage/emulated/0/"+local_name,
         function(entry) {
-            console.log("Success!");
+            console.log("Success333!");
             // appStart();
         },
         function(err) {
