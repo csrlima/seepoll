@@ -50,7 +50,7 @@ function prepare_url(local_name) {
   //     }
   // };
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-        fileSystem.root.getFile(local_name, { create: false }, fileExists2, fileDoesNotExist2);
+        fileSystem.root.getFile(local_name, { create: false }, fileExists, fileDoesNotExist(local_name));
     }, onErrorLoadFs); //of requestFileSystem
 
     // window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
@@ -76,7 +76,7 @@ function fileDoesNotExist(local_name){
     console.log("About to start transfer");
     fileTransfer.download(url + local_name, "file:///storage/emulated/0/"+local_name,
         function(entry) {
-            console.log("Success333!");
+            console.log("Success!");
             // appStart();
         },
         function(err) {
