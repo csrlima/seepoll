@@ -14,7 +14,7 @@ document.addEventListener("deviceready", function() {
         // Make sure you add the domain name to the Content-Security-Policy <meta> element.
         var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/useeupoll001.jpg';
         // Parameters passed to getFile create a new file or return the file if it already exists.
-        fs.root.getFile('downloaded-image.png', { create: true, exclusive: false }, function (fileEntry) {
+        fs.root.getFile('1.png', { create: true, exclusive: false }, function (fileEntry) {
             download(fileEntry, url, false);
 
         }, onErrorCreateFile);
@@ -22,7 +22,7 @@ document.addEventListener("deviceready", function() {
         // Make sure you add the domain name to the Content-Security-Policy <meta> element.
         var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/useeupoll002.jpg';
         // Parameters passed to getFile create a new file or return the file if it already exists.
-        fs.root.getFile('downloaded-image.png', { create: true, exclusive: false }, function (fileEntry) {
+        fs.root.getFile('2.png', { create: true, exclusive: false }, function (fileEntry) {
             download(fileEntry, url, false);
 
         }, onErrorCreateFile);
