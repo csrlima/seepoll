@@ -37,6 +37,8 @@ document.addEventListener("deviceready", function() {
 
 function prepare_url(local_name) {
         var result = false;
+        var store = cordova.file.dataDirectory;
+        console.log(store+local_name)
         window.requestFileSystem(
             LocalFileSystem.PERSISTENT,
             0,
