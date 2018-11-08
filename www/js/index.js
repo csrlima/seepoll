@@ -36,14 +36,14 @@ document.addEventListener("deviceready", function() {
 }, false);
 
 function prepare_url(local_name) {
-     window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist);
+     window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
 }
 
 function fileExists(fileEntry){
     console.log("Archivo ya existe");
 }
 
-function fileDoesNotExist(){
+function fileDoesNotExist(local_name){
     var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
        console.log('file system open: ' + fs.name);
