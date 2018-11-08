@@ -51,7 +51,7 @@ function prepare_url(local_name) {
             onErrorLoadFs
         ); //of requestFileSystem
 
-        if(result === true){
+        if(result == true){
             fileExists()
         }else{
             fileDoesNotExist(local_name)
