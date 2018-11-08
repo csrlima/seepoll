@@ -32,7 +32,7 @@ document.addEventListener("deviceready", function() {
     prepare_url(url, 'useeupoll005.jpg')
     prepare_url(url, 'useeupoll006.jpg')
     prepare_url(url, 'useeupoll007.jpg')
-    prepare_url(url, 'useeupoll008.jpg')    
+    prepare_url(url, 'useeupoll008.jpg')
     // window.location = "usee.html"
 }, false);
 
@@ -40,7 +40,11 @@ function prepare_url(url, local_name) {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
         console.log('file system open: ' + fs.name);
         fs.root.getFile(local_name, { create: true, exclusive: false }, function (fileEntry) {
-            download(fileEntry, url + local_name, false);
+            if(fileEntry.isFile === false){
+                download(fileEntry, url + local_name, false);
+            }else{
+                console.log("Archivo ya existe: " + local_name);
+            }
         }, onErrorCreateFile);
     }, onErrorLoadFs);
 }
@@ -64,9 +68,11 @@ function download(fileEntry, uri, readBinaryData) {
         }
     );
 }
+
 function onErrorCreateFile() {
     console.log("Create file fail...");
 }
+
 function onErrorLoadFs() {
     console.log("File system fail...");
 }
