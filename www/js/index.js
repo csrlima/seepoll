@@ -57,7 +57,7 @@ function fileDoesNotExist(){
     var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
     var fileTransfer = new FileTransfer();
     console.log("About to start transfer:" + file_name);
-    fileTransfer.download(url + fileEntry.name, "file:///storage/emulated/0/"+fileEntry.name,
+    fileTransfer.download(url + file_name, "file:///storage/emulated/0/"+file_name,
         function(entry) {
             console.log("Success!");
         },
