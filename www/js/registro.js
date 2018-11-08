@@ -7,28 +7,28 @@ $("form").submit(function( event ) {
     // window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
 document.addEventListener("deviceready", function() {
     // window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+    var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
+    prepare_url(url, 'useeupoll001.jpg')
+    prepare_url(url, 'useeupoll002.jpg')
 
-        console.log('file system open: ' + fs.name);
 
-        // Make sure you add the domain name to the Content-Security-Policy <meta> element.
-        var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/useeupoll001.jpg';
-        // Parameters passed to getFile create a new file or return the file if it already exists.
-        fs.root.getFile('1.png', { create: true, exclusive: false }, function (fileEntry) {
-            download(fileEntry, url, false);
 
-        }, onErrorCreateFile);
-
-        // Make sure you add the domain name to the Content-Security-Policy <meta> element.
-        var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/useeupoll002.jpg';
-        // Parameters passed to getFile create a new file or return the file if it already exists.
-        fs.root.getFile('2.png', { create: true, exclusive: false }, function (fileEntry) {
-            download(fileEntry, url, false);
-
-        }, onErrorCreateFile);
-
-    }, onErrorLoadFs);
 }, false);
+
+
+
+function prepare_url(url, local_name) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+        console.log('file system open: ' + fs.name);
+        // Make sure you add the domain name to the Content-Security-Policy <meta> element.
+        // Parameters passed to getFile create a new file or return the file if it already exists.
+        fs.root.getFile(local_name, { create: true, exclusive: false }, function (fileEntry) {
+            download(fileEntry, url + local_name, false);
+        }, onErrorCreateFile);
+    }, onErrorLoadFs);
+}
+
+
 
 function download(fileEntry, uri, readBinaryData) {
 
