@@ -36,28 +36,7 @@ document.addEventListener("deviceready", function() {
 }, false);
 
 function prepare_url(local_name) {
-        var result = false;
-        var store = cordova.file.dataDirectory;
-        console.log(store+local_name)
-        window.requestFileSystem(
-            LocalFileSystem.PERSISTENT,
-            0,
-            function(fileSystem){
-                fileSystem.root.getFile(
-                    local_name,
-                    { create: false },
-                    function(){ result = true; }, // file exists
-                    function(){ result = false; } // file does not exist
-                );
-            },
-            onErrorLoadFs
-        ); //of requestFileSystem
 
-        if(result == true){
-            fileExists()
-        }else{
-            fileDoesNotExist(local_name)
-        }
 
   //   var reader = new FileReader();
   //   var fileSource = "file:///storage/emulated/0/"+local_name;
@@ -70,13 +49,21 @@ function prepare_url(local_name) {
   //         fileExists()
   //     }
   // };
-    // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-    //     fileSystem.root.getFile("file:///storage/emulated/0/"+local_name, { create: false }, fileExists, fileDoesNotExist(local_name));
-    // }, onErrorLoadFs); //of requestFileSystem
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+        fileSystem.root.getFile(local_name, { create: false }, fileExists2, fileDoesNotExist2);
+    }, onErrorLoadFs); //of requestFileSystem
 
     // window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
     // resp = window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name);
     // console.log(resp)
+}
+
+
+function fileExists2(fileEntry){
+    alert("File " + fileEntry.fullPath + " exists!");
+}
+function fileDoesNotExist2(){
+    alert("file does not exist");
 }
 
 function fileExists(){
