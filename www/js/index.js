@@ -53,7 +53,8 @@ function fileExists(){
     console.log("Archivo ya existe: " + file_name);
 }
 
-function fileDoesNotExist(){
+function fileDoesNotExist(e){
+    console.dir(e);
     var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
     var fileTransfer = new FileTransfer();
     console.log("About to start transfer:" + file_name);
