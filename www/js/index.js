@@ -38,22 +38,24 @@ document.addEventListener("deviceready", function() {
 function prepare_url(local_name) {
 
 
-  //   var reader = new FileReader();
-  //   var fileSource = "file:///storage/emulated/0/"+local_name;
-  //   reader.onloadend = function(evt) {
-  //     if(evt.target.result != null) {
-  //         // If you receive not null value the file exists
-  //          fileDoesNotExist(local_name)
-  //     } else {
-  //         // Otherwise the file doesn't exists
-  //         fileExists()
-  //     }
-  // };
-    var resp = false;
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-        fileSystem.root.getFile(local_name, { create: false }, function(){ resp = true}, function(){ resp = false});
-        console.log(resp);
-    }, onErrorLoadFs); //of requestFileSystem
+    var reader = new FileReader();
+    var fileSource = local_name;
+    reader.onloadend = function(evt) {
+      if(evt.target.result != null) {
+          // If you receive not null value the file exists
+           // fileDoesNotExist(local_name)
+           alert("file does not exist");
+      } else {
+          // Otherwise the file doesn't exists
+          // fileExists()
+          console.log("Archivo ya existe");
+      }
+  };
+    // var resp = false;
+    // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+    //     fileSystem.root.getFile(local_name, { create: false }, function(){ resp = true}, function(){ resp = false});
+    //     console.log(resp);
+    // }, onErrorLoadFs); //of requestFileSystem
 
     // window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
     // resp = window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name);
