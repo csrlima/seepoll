@@ -50,7 +50,7 @@ function prepare_url(local_name) {
   //     }
   // };
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-        fileSystem.root.getFile(local_name, { create: false }, fileExists, fileDoesNotExist(local_name));
+        fileSystem.root.getFile(local_name, { create: false }, fileExists, fileDoesNotExist;
     }, onErrorLoadFs); //of requestFileSystem
 
     // window.resolveLocalFileSystemURL("file:///storage/emulated/0/"+local_name, fileExists, fileDoesNotExist(local_name));
@@ -60,7 +60,7 @@ function prepare_url(local_name) {
 
 
 function fileExists2(fileEntry){
-    alert("File " + fileEntry.fullPath + " exists!");
+    alert("File " + fileEntry.name + " exists!");
 }
 function fileDoesNotExist2(){
     alert("file does not exist");
@@ -72,9 +72,10 @@ function fileExists(){
 
 function fileDoesNotExist(local_name){
     var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
+    console.log(fileEntry.name);
     var fileTransfer = new FileTransfer();
     console.log("About to start transfer");
-    fileTransfer.download(url + local_name, "file:///storage/emulated/0/"+local_name,
+    fileTransfer.download(url + fileEntry.name, "file:///storage/emulated/0/"+fileEntry.name,
         function(entry) {
             console.log("Success!");
             // appStart();
