@@ -41,6 +41,7 @@ function prepare_url(local_name) {
 
 function fileExists(fileEntry){
     console.log("Archivo ya existe");
+    return;
 }
 
 function fileDoesNotExist(local_name){
