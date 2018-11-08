@@ -24,6 +24,7 @@ var app = {
 
 app.initialize();
 document.addEventListener("deviceready", function() {
+    console.log('ready listener')
     var url = 'http://xmpp.radiomarketbeat.com/plataforma/assets/lnImagenes/';
     prepare_url(url, 'useeupoll001.jpg')
     prepare_url(url, 'useeupoll002.jpg')
@@ -47,6 +48,7 @@ function prepare_url(url, local_name) {
         }, onErrorCreateFile);
     }, onErrorLoadFs);
 }
+
 function download(fileEntry, uri, readBinaryData) {
     var fileTransfer = new FileTransfer();
     var fileURL = fileEntry.toURL();
