@@ -66,6 +66,7 @@ function get_playlist_updated_usee() {
                 update_files();
             }else{
                 console.log("Error POST: No se obtuvo la lista de imagenes actualizada");
+                setInterval('local_wait()',1000);
             }
         }
     });
