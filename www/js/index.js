@@ -24,13 +24,12 @@ var app = {
 app.initialize();
 
 $(document).ready(function(){
-    //get_playlist_updated_usee()
+    get_playlist_updated_usee()
 })
 
 /// DESCARGA DE CONTENIDO
 function update_files() {
     document.addEventListener("deviceready", function() {
-        get_playlist_updated_usee()
         var playlist_usee = json_decode(localStorage.getItem("playlist_usee"));
         $.each(playlist_usee, function(index, item) {
             search_file_local(item.nombre_imagen);
