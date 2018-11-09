@@ -1,6 +1,3 @@
-
-var base_url = "http://xmpp.radiomarketbeat.com/resources_mobile/";
-var key_value = "c526bef2-cc7d-48fc-830d-3c094788a942"
 ///INICIALIZACION DE APP
 var app = {
     initialize: function() {
@@ -31,6 +28,7 @@ $(document).ready(function(){
 
     var playlist_usee = json_decode(localStorage.getItem("playlist_usee"));
     $.each(playlist_usee, function(index, item) {
+        console.log(item.nombre_imagen);
         add_slide_nodes(item.nombre_imagen);
     });
 })
