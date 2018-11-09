@@ -28,16 +28,21 @@ $(document).ready(function(){
     $('.botonF1').click(function(){
         window.location = "registro.html"
     })
+
+    var playlist_usee = json_decode(localStorage.getItem("playlist_usee"));
+    $.each(playlist_usee, function(index, item) {
+        add_slide_nodes(item.nombre_imagen);
+    });
 })
 
-add_slide_nodes('useeupoll001.jpg');
-add_slide_nodes('useeupoll002.jpg');
-add_slide_nodes('useeupoll003.jpg');
-add_slide_nodes('useeupoll004.jpg');
-add_slide_nodes('useeupoll005.jpg');
-add_slide_nodes('useeupoll006.jpg');
-add_slide_nodes('useeupoll007.jpg');
-add_slide_nodes('useeupoll008.jpg');
+// add_slide_nodes('useeupoll001.jpg');
+// add_slide_nodes('useeupoll002.jpg');
+// add_slide_nodes('useeupoll003.jpg');
+// add_slide_nodes('useeupoll004.jpg');
+// add_slide_nodes('useeupoll005.jpg');
+// add_slide_nodes('useeupoll006.jpg');
+// add_slide_nodes('useeupoll007.jpg');
+// add_slide_nodes('useeupoll008.jpg');
 
 function add_slide_nodes(local_name) {
     $('.slides').append('<div><img data-u="image" src="file:///storage/emulated/0/'+local_name+'" /></div>')
