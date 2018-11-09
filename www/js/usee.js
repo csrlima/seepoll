@@ -25,14 +25,13 @@ $(document).ready(function(){
     $('.botonF1').click(function(){
         window.location = "registro.html"
     })
-
-    var playlist_usee = json_decode(localStorage.getItem("playlist_usee"));
-    $.each(playlist_usee, function(index, item) {
-        console.log(item.nombre_imagen);
-        add_slide_nodes(item.nombre_imagen);
-    });
 })
 
+var playlist_usee = json_decode(localStorage.getItem("playlist_usee"));
+$.each(playlist_usee, function(index, item) {
+    console.log("Playing:" + item.nombre_imagen);
+    add_slide_nodes(item.nombre_imagen);
+});
 // add_slide_nodes('useeupoll001.jpg');
 // add_slide_nodes('useeupoll002.jpg');
 // add_slide_nodes('useeupoll003.jpg');
