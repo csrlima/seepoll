@@ -28,13 +28,16 @@ $(document).ready(function(){
 })
 
 /// DESCARGA DE CONTENIDO
-document.addEventListener("deviceready", function() {
-    get_playlist_updated_usee()
-    var playlist_usee = json_decode(localStorage.getItem("playlist_usee"));
-    $.each(playlist_usee, function(index, item) {
-        search_file_local(item.nombre_imagen);
-    });
-}, false);
+function update_files() {
+    document.addEventListener("deviceready", function() {
+        get_playlist_updated_usee()
+        var playlist_usee = json_decode(localStorage.getItem("playlist_usee"));
+        $.each(playlist_usee, function(index, item) {
+            search_file_local(item.nombre_imagen);
+        });
+    }, false);
+}
+
 
 function get_playlist_updated_usee() {
     var data ={
@@ -50,6 +53,7 @@ function get_playlist_updated_usee() {
             if(response.status == "success"){
                 console.log(json_encode(response.data));
                 localStorage.setItem("playlist_usee", json_encode(response.data));
+                update_files();
             }else{
                 console.log("Error POST: No se obtuvo la lista de imagenes actualizada");
             }
