@@ -34,9 +34,9 @@ function update_files() {
         $.each(playlist_usee, function(index, item) {
             search_file_local(item.nombre_imagen);
         });
+        window.location = "usee.html"
     }, false);
 }
-
 
 function get_playlist_updated_usee() {
     var data ={
