@@ -68,8 +68,8 @@ function get_playlist_updated_usee() {
                 console.log("Error POST: No se obtuvo la lista de imagenes actualizada");
                 window.location = "usee.html"
             }
-        }
-        error: function (xhr, ajaxOptions, thrownError) {
+        },
+        error: function (request, status, error) {
             console.log("Sin conexion a Internet");
             window.location = "usee.html"
         }
