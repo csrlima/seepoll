@@ -69,7 +69,7 @@ function get_playlist_updated_usee() {
                 window.location = "usee.html"
             }
         }
-        error: function () {
+        error: function (xhr, ajaxOptions, thrownError) {
             console.log("Sin conexion a Internet");
             window.location = "usee.html"
         }
