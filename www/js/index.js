@@ -44,7 +44,7 @@ function update_files() {
 }
 
 function local_wait(){
-    if(pf_local == pf_server){
+    if(pf_local >= pf_server){
         window.location = "usee.html"
     }
 }
@@ -66,7 +66,7 @@ function get_playlist_updated_usee() {
                 update_files();
             }else{
                 console.log("Error POST: No se obtuvo la lista de imagenes actualizada");
-                setInterval('local_wait()',1000);
+                window.location = "usee.html"
             }
         }
     });
