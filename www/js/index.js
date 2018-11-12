@@ -69,6 +69,10 @@ function get_playlist_updated_usee() {
                 window.location = "usee.html"
             }
         }
+        error: function () {
+            console.log("Sin conexion a Internet");
+            window.location = "usee.html"
+        }
     });
 }
 
